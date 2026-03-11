@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thksesocks | Official Page</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .glass-container { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 30%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.6);
+        }
+
+        .card-feature {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card-feature:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="py-10 px-4">
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const PROFILE_DATA = {
+            name: "Your Name Here",
+            title: "Digital Creator",
+            bio: "Welcome to my creative space. Join me on my journey through my official platforms and explore exclusive content updated daily.",
+            stats: [
+                { label: "Followers", value: "10K+" },
+                { label: "Projects", value: "150+" },
+                { label: "Experience", value: "3 Years" }
+            ],
+            features: [
+                { title: "Exclusive Access", desc: "Unlock premium content and unreleased highlights." },
+                { title: "Custom Requests", desc: "Tailored creative work based on your specific needs." },
+                { title: "Direct Support", desc: "Fast and direct communication through official channels." }
+            ],
+            images: {
+                p1: "https://i.ibb.co/Cppk8w10/image.webp",
+                p2: "https://i.ibb.co/wNyvPBHM/image.webp"
+            },
+            links: {
+                facebook: "https://onlyfans.com/thosesocks.official",
+                instagram: "https://t.me/sweatysocksgymgirlsocken",
+                telegram: "https://www.instagram.com/dreamyfitgirl"
+            }
+        };
+
+        const App = () => {
+            return (
+                <div className="max-w-2xl mx-auto space-y-6">
+                    
+                    {/* Header Card */}
+                    <div className="glass-container rounded-[3rem] p-8 text-center animate-fade">
+                        <div className="flex justify-center gap-4 mb-8">
+                            <img src={PROFILE_DATA.images.p1} className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-indigo-500/30 p-1 object-cover shadow-2xl" alt="Profile 1" />
+                            <img src={PROFILE_DATA.images.p2} className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl border-2 border-purple-500/30 p-1 object-cover rotate-3 shadow-2xl" alt="Profile 2" />
+                        </div>
+                        
+                        <h1 className="text-4xl sm:text-5xl font-black text-gradient mb-2">{PROFILE_DATA.name}</h1>
+                        <p className="text-indigo-400 font-bold tracking-widest text-sm uppercase mb-4">{PROFILE_DATA.title}</p>
+                        <p className="text-gray-400 leading-relaxed max-w-md mx-auto">{PROFILE_DATA.bio}</p>
+                        
+                        {/* Stats Section */}
+                        <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/5">
+                            {PROFILE_DATA.stats.map((stat, i) => (
+                                <div key={i}>
+                                    <div className="text-xl font-bold text-white">{stat.value}</div>
+                                    <div className="text-xs text-gray-500 uppercase tracking-tighter">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Quick Action Buttons */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade" style={{animationDelay: '0.2s'}}>
+                        <a href={PROFILE_DATA.links.telegram} className="btn-premium py-4 rounded-2xl text-center font-bold flex items-center justify-center gap-2">
+                            <span>Join Channel</span>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </a>
+                        <a href={PROFILE_DATA.links.instagram} className="bg-white/5 hover:bg-white/10 border border-white/10 py-4 rounded-2xl text-center font-bold transition-all">
+                            View Art Gallery
+                        </a>
+                    </div>
+
+                    {/* Features Section */}
+                    <div className="grid grid-cols-1 gap-4 animate-fade" style={{animationDelay: '0.4s'}}>
+                        {PROFILE_DATA.features.map((f, i) => (
+                            <div key={i} className="card-feature p-5 rounded-2xl flex items-center gap-5">
+                                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 font-bold">
+                                    0{i+1}
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-white">{f.title}</h3>
+                                    <p className="text-sm text-gray-500">{f.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Social Links Footer */}
+                    <div className="glass-container rounded-3xl p-6 flex justify-center gap-8 animate-fade" style={{animationDelay: '0.6s'}}>
+          
+                        <a href={PROFILE_DATA.links.instagram} className="text-gray-400 hover:text-pink-500 transition-colors">
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href={PROFILE_DATA.links.telegram} className="text-gray-400 hover:text-blue-400 transition-colors">
+                            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                        </a>
+                    </div>
+
+                    <p className="text-center text-gray-600 text-xs pb-10">© 2026 Your Brand. All rights reserved.</p>
+                </div >
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
