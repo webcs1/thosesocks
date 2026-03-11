@@ -9,63 +9,74 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
         
         body { 
-            font-family: 'Inter', sans-serif;
-            background-color: #050505;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #080808;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 35%);
             background-attachment: fixed;
             color: #ffffff;
-            overflow-x: hidden;
         }
 
-        .glass-container { 
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.07); 
         }
 
-        .text-gradient {
-            background: linear-gradient(135deg, #fff 30%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .img-container {
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .btn-premium {
+        .img-container:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+
+        .glow-effect {
+            position: absolute;
+            inset: -10px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            filter: blur(20px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .btn-link {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #6366f1;
+            transform: translateX(5px);
+        }
+
+        .premium-btn {
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
-        }
-
-        .btn-premium:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 25px -5px rgba(79, 70, 229, 0.6);
-        }
-
-        .card-feature {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
             transition: all 0.3s ease;
         }
 
-        .card-feature:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transform: translateY(-5px);
+        .premium-btn:hover {
+            box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.6);
+            filter: brightness(1.1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate-fade { animation: fadeIn 0.8s ease-out forwards; }
+        .animate-up { animation: slideUp 0.8s ease-out forwards; }
     </style>
 </head>
-<body class="py-10 px-4">
+<body class="py-12 px-4">
 
     <div id="root"></div>
 
@@ -73,10 +84,9 @@
         const PROFILE_DATA = {
             name: "thosesocks",
             title: "Digital Creator",
-            bio: "Welcome to my creative space. Join me on my journey through my official platforms and explore exclusive content updated daily,My sweaty feet are waiting for you👣",
+            bio: "Welcome to my creative space. Join me on my journey through my official platforms and explore exclusive content updated daily, My sweaty feet are waiting for you👣",
             stats: [
                 { label: "Followers", value: "600+" },
-                
             ],
             features: [
                 { title: "Exclusive Access", desc: "Unlock premium content and unreleased highlights." },
@@ -96,68 +106,72 @@
 
         const App = () => {
             return (
-                <div className="max-w-2xl mx-auto space-y-6">
+                <div className="max-w-lg mx-auto space-y-8">
                     
-                    {/* Header Card */}
-                    <div className="glass-container rounded-[3rem] p-8 text-center animate-fade">
-                        <div className="flex justify-center gap-4 mb-8">
-                            <img src={PROFILE_DATA.images.p1} className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-indigo-500/30 p-1 object-cover shadow-2xl" alt="Profile 1" />
-                            <img src={PROFILE_DATA.images.p2} className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl border-2 border-purple-500/30 p-1 object-cover rotate-3 shadow-2xl" alt="Profile 2" />
+                    {/* Image Section - Separated Layout */}
+                    <div className="flex justify-center items-center gap-10 py-6 animate-up">
+                        <div className="img-container">
+                            <div className="glow-effect"></div>
+                            <img src={PROFILE_DATA.images.p1} className="w-28 h-28 rounded-3xl object-cover border border-white/10 shadow-2xl" alt="Profile 1" />
                         </div>
-                        
-                        <h1 className="text-4xl sm:text-5xl font-black text-gradient mb-2">{PROFILE_DATA.name}</h1>
-                        <p className="text-indigo-400 font-bold tracking-widest text-sm uppercase mb-4">{PROFILE_DATA.title}</p>
-                        <p className="text-gray-400 leading-relaxed max-w-md mx-auto">{PROFILE_DATA.bio}</p>
-                        
-                        {/* Stats Section */}
-                        <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/5">
-                            {PROFILE_DATA.stats.map((stat, i) => (
-                                <div key={i}>
-                                    <div className="text-xl font-bold text-white">{stat.value}</div>
-                                    <div className="text-xs text-gray-500 uppercase tracking-tighter">{stat.label}</div>
-                                </div>
-                            ))}
+                        <div className="img-container" style={{transitionDelay: '0.1s'}}>
+                            <div className="glow-effect" style={{background: '#a855f7'}}></div>
+                            <img src={PROFILE_DATA.images.p2} className="w-28 h-28 rounded-3xl object-cover border border-white/10 shadow-2xl" alt="Profile 2" />
                         </div>
                     </div>
 
-                    {/* Quick Action Buttons */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade" style={{animationDelay: '0.2s'}}>
-                        <a href={PROFILE_DATA.links.telegram} className="btn-premium py-4 rounded-2xl text-center font-bold flex items-center justify-center gap-2">
-                            <span>Join Channel</span>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    {/* Content Section */}
+                    <div className="text-center space-y-4 animate-up" style={{animationDelay: '0.2s'}}>
+                        <h1 className="text-5xl font-black tracking-tighter text-white">{PROFILE_DATA.name}</h1>
+                        <p className="text-indigo-400 font-bold uppercase tracking-[0.2em] text-xs">{PROFILE_DATA.title}</p>
+                        <p className="text-gray-400 text-md leading-relaxed px-4">{PROFILE_DATA.bio}</p>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex justify-center animate-up" style={{animationDelay: '0.3s'}}>
+                        <div className="glass-card px-10 py-3 rounded-full border border-white/5">
+                            <span className="text-xl font-bold text-white">{PROFILE_DATA.stats[0].value}</span>
+                            <span className="ml-2 text-xs text-gray-500 uppercase tracking-widest">{PROFILE_DATA.stats[0].label}</span>
+                        </div>
+                    </div>
+
+                    {/* Action Links */}
+                    <div className="grid gap-4 animate-up" style={{animationDelay: '0.4s'}}>
+                        <a href={PROFILE_DATA.links.facebook} className="premium-btn py-5 rounded-2xl text-center font-bold text-white flex items-center justify-center gap-3">
+                            <span>PREMIUM CONTENT</span>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
                         </a>
-                        <a href={PROFILE_DATA.links.facebook} className="bg-white/5 hover:bg-white/10 border border-white/10 py-4 rounded-2xl text-center font-bold transition-all">
-                            premium content
+                        
+                        <a href={PROFILE_DATA.links.telegram} className="btn-link py-4 rounded-2xl px-6 flex justify-between items-center group">
+                            <span className="font-semibold">Join Official Channel</span>
+                            <svg className="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/></svg>
                         </a>
                     </div>
 
                     {/* Features Section */}
-                    <div className="grid grid-cols-1 gap-4 animate-fade" style={{animationDelay: '0.4s'}}>
+                    <div className="glass-card rounded-[2rem] p-6 space-y-4 animate-up" style={{animationDelay: '0.5s'}}>
                         {PROFILE_DATA.features.map((f, i) => (
-                            <div key={i} className="card-feature p-5 rounded-2xl flex items-center gap-5">
-                                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 font-bold">
-                                    0{i+1}
-                                </div>
+                            <div key={i} className="flex items-start gap-4 p-2">
+                                <div className="mt-1 w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_#6366f1]"></div>
                                 <div>
-                                    <h3 className="font-bold text-white">{f.title}</h3>
-                                    <p className="text-sm text-gray-500">{f.desc}</p>
+                                    <h3 className="font-bold text-sm text-gray-100">{f.title}</h3>
+                                    <p className="text-xs text-gray-500">{f.desc}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    {/* Social Links Footer */}
-                    <div className="glass-container rounded-3xl p-6 flex justify-center gap-8 animate-fade" style={{animationDelay: '0.6s'}}>
-          
-                        <a href={PROFILE_DATA.links.instagram} className="text-gray-400 hover:text-pink-500 transition-colors">
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    {/* Social Icons */}
+                    <div className="flex justify-center gap-8 py-4 animate-up" style={{animationDelay: '0.6s'}}>
+                        <a href={PROFILE_DATA.links.instagram} className="text-gray-500 hover:text-white transition-colors transform hover:scale-110">
+                            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                         </a>
-                        <a href={PROFILE_DATA.links.telegram} className="text-gray-400 hover:text-blue-400 transition-colors">
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                        <a href={PROFILE_DATA.links.telegram} className="text-gray-500 hover:text-white transition-colors transform hover:scale-110">
+                            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
                         </a>
                     </div>
 
-                    <p className="text-center text-gray-600 text-xs pb-10">© 2026 Your Brand. All rights reserved.</p>
+                    <p className="text-center text-gray-600 text-[10px] tracking-[0.3em] font-bold pb-10">© 2026 OFFICIAL PORTAL</p>
                 </div >
             );
         };
